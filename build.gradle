@@ -2,6 +2,7 @@ plugins {
     id 'org.springframework.boot' version '3.1.0'
     id 'io.spring.dependency-management' version '1.1.0'
     id 'java'
+    id 'com.github.node-gradle.node' version '5.0.0'
 }
 
 group = 'com.kpruncoach'
@@ -33,3 +34,28 @@ dependencies {
 test {
     useJUnitPlatform()
 }
+
+// Frontend build configuration
+node {
+    version = '18.17.0'
+    npmVersion = '9.6.7'
+    workDir = file("${project.projectDir}/src/frontend")
+    nodeProjectDir = file("${project.projectDir}/src/frontend")
+}
+
+task buildFrontend(type: NpmTask, dependsOn: npmInstall) {
+    description = 'Build frontend'
+    workingDir = file("${project.projectDir}/src/frontend")
+    args = ['run', 'build']
+    inputs.dir('src/frontend/src')
+    inputs.file('src/frontend/package.json')
+    outputs.dir('src/frontend/build')
+}
+
+task copyFrontendBuild(type: Copy, dependsOn: buildFrontend) {
+    description = 'Copy frontend build to Spring Boot static resources'
+    from 'src/frontend/build'
+    into 'src/main/resources/static'
+}
+
+processResources.dependsOn copyFrontendBuild

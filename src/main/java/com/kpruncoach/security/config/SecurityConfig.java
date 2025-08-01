@@ -35,6 +35,8 @@ public class SecurityConfig {
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/api/auth/**").permitAll()
                 .requestMatchers("/api/verify/**").permitAll()
+                .requestMatchers("/", "/static/**", "/favicon.ico", "/manifest.json").permitAll()
+                .requestMatchers("/index.html", "/*.js", "/*.css", "/*.png", "/*.jpg", "/*.gif", "/*.svg").permitAll()
                 .anyRequest().authenticated()
             )
             .authenticationProvider(authenticationProvider())

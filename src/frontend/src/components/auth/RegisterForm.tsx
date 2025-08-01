@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 interface RegisterFormData {
   firstName: string;
@@ -9,7 +8,6 @@ interface RegisterFormData {
 }
 
 const RegisterForm: React.FC = () => {
-  const navigate = useNavigate();
   const [formData, setFormData] = useState<RegisterFormData>({
     firstName: '',
     lastName: '',
@@ -17,6 +15,8 @@ const RegisterForm: React.FC = () => {
     password: '',
   });
   const [errors, setErrors] = useState<Partial<RegisterFormData>>({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitMessage, setSubmitMessage] = useState('');
 
   const validateForm = (): boolean => {
     const newErrors: Partial<RegisterFormData> = {};
@@ -39,6 +39,9 @@ const RegisterForm: React.FC = () => {
     e.preventDefault();
     if (!validateForm()) return;
 
+    setIsSubmitting(true);
+    setSubmitMessage('');
+
     try {
       const response = await fetch('/api/auth/register/coach', {
         method: 'POST',
@@ -47,18 +50,23 @@ const RegisterForm: React.FC = () => {
       });
 
       if (response.ok) {
-        navigate('/verify-email-sent');
+        setSubmitMessage('Registration successful! Please check your email for verification.');
+        setFormData({ firstName: '', lastName: '', email: '', password: '' });
       } else {
         const data = await response.json();
         setErrors({ email: data.message });
       }
     } catch (error) {
       setErrors({ email: 'Registration failed. Please try again.' });
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
   return (
     <form onSubmit={handleSubmit} className="register-form">
+      {submitMessage && <div className="success-message">{submitMessage}</div>}
+
       <div className="form-group">
         <label htmlFor="firstName">First Name</label>
         <input
@@ -103,7 +111,9 @@ const RegisterForm: React.FC = () => {
         {errors.password && <span className="error">{errors.password}</span>}
       </div>
 
-      <button type="submit">Register as Coach</button>
+      <button type="submit" disabled={isSubmitting}>
+        {isSubmitting ? 'Registering...' : 'Register'}
+      </button>
     </form>
   );
 };
