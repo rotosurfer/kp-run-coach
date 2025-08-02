@@ -2,35 +2,35 @@
 
 ## US-1.1: Coach Registration
 ### Backend Tasks (Spring Boot 3.1 + PostgreSQL)
-- [ ] Complete User entity with JPA annotations (@Entity, @Table, @Column constraints)
-- [ ] Implement BCryptPasswordEncoder in SecurityConfig for password hashing
-- [ ] Create POST /api/auth/register/coach endpoint in AuthController
-- [ ] Implement EmailService with JavaMailSender for verification emails
-- [ ] Create POST /api/auth/login endpoint with JWT token generation using JwtUtils
-- [ ] Implement password reset with secure token generation and validation
-- [ ] Add account lockout mechanism (failedLoginAttempts, accountLocked fields)
-- [ ] Create email verification token validation endpoint
-- [ ] Add PostgreSQL database migration scripts (if using Flyway/Liquibase)
+- [x] Complete User entity with JPA annotations (@Entity, @Table, @Column constraints)
+- [x] Implement BCryptPasswordEncoder in SecurityConfig for password hashing
+- [x] Create POST /api/auth/register/coach endpoint in AuthController
+- [x] Implement EmailService with JavaMailSender for verification emails
+- [x] Create POST /api/auth/login endpoint with JWT token generation using JwtUtils
+- [x] Implement password reset with secure token generation and validation
+- [x] Add account lockout mechanism (failedLoginAttempts, accountLocked fields)
+- [x] Create email verification token validation endpoint
+- [x] Add PostgreSQL database migration scripts (if using Flyway/Liquibase)
 
 ### Frontend Tasks (React + TypeScript)
-- [ ] Complete RegisterForm.tsx component with proper validation
-- [ ] Create LoginForm.tsx component with JWT token handling
-- [ ] Implement form validation using react-hook-form or custom validation
-- [ ] Create EmailVerification.tsx component for verification flow
-- [ ] Build PasswordReset.tsx and PasswordResetForm.tsx components
-- [ ] Add error handling with toast notifications or error displays
-- [ ] Create AuthContext for JWT token management and user state
-- [ ] Implement protected route wrapper component
-- [ ] Add loading states and form submission handling
+- [x] Complete RegisterForm.tsx component with proper validation
+- [x] Create LoginForm.tsx component with JWT token handling
+- [x] Implement form validation using react-hook-form or custom validation
+- [x] Create EmailVerification.tsx component for verification flow
+- [x] Build PasswordReset.tsx and PasswordResetForm.tsx components
+- [x] Add error handling with toast notifications or error displays
+- [x] Create AuthContext for JWT token management and user state
+- [x] Implement protected route wrapper component
+- [x] Add loading states and form submission handling
 
 ### Testing Tasks
-- [ ] Unit tests for AuthService using JUnit 5 and Mockito
-- [ ] Integration tests for AuthController with @WebMvcTest
-- [ ] Repository tests for UserRepository with @DataJpaTest
-- [ ] Security tests for password hashing and JWT validation
-- [ ] Email service tests with mock SMTP server
-- [ ] Frontend unit tests with Jest and React Testing Library
-- [ ] E2E tests using Playwright or Cypress
+- [x] Unit tests for AuthService using JUnit 5 and Mockito
+- [x] Integration tests for AuthController with @WebMvcTest
+- [x] Repository tests for UserRepository with @DataJpaTest
+- [x] Security tests for password hashing and JWT validation
+- [x] Email service tests with mock SMTP server
+- [x] Frontend unit tests with Jest and React Testing Library
+- [x] E2E tests using Playwright or Cypress
 
 ## US-1.2: Runner Registration
 ### Backend Tasks (Spring Boot)
